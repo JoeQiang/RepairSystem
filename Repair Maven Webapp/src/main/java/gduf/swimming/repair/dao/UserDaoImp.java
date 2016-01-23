@@ -15,17 +15,30 @@ public class UserDaoImp implements UserDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public User findUserByUserName(String username) {
-		String sqlStr = "select id,uname,pwd from user where uname =?";
-		final User user = new User();
-		jdbcTemplate.query(sqlStr, new Object[] { username },
-				new UserRowMapper());
-		return user;
+	public User findUserByName(int studentNum) {
+		String sqlStr = "select id,uname,pwd from t_user where stunum =?";
+		final User u = new User();
+		jdbcTemplate.query(sqlStr, new Object[] { studentNum },
+				new RowCallbackHandler() {
+					public void processRow(ResultSet rs) throws SQLException {
+						u.setUid(rs.getInt("uid"));
+						u.setStunum(rs.getInt("stunum"));
+						u.setUadress(rs.getString("uadress"));
+						u.setUname(rs.getString("uname"));
+						u.setUpwd(rs.getString("upwd"));
+						u.setUphone(rs.getLong("uphone"));
+						u.setUrank(rs.getInt("urank"));
+					}
+
+				});
+		return u;
 	}
 
 	public void register(User user) {
-		String sqlStr = "insert into user(uname,pwd) value(?,?)";
-		Object[] params = new Object[] { user.getUsername(), user.getPassword() };
+		String sqlStr = "insert into user(uphone,uname,upwd,urank,uadress,stunum) value(?,?,?,?,?,?)";
+		Object[] params = new Object[] { user.getUphone(), user.getUname(),
+				user.getUpwd(), user.getUrank(), user.getUadress(),
+				user.getStunum() };
 		jdbcTemplate.update(sqlStr, params);
 	}
 

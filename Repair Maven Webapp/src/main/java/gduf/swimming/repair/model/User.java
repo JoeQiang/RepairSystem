@@ -4,38 +4,75 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class User implements Serializable {
-	private int id;
-	private String username;
-	private String password;
+	private int uid;
+	private long uphone;
+	private String uname;
+	private String upwd;
+	private int urank;
+	private String uadress;
+	private int stunum;
 
-	public int getId() {
-		return id;
+	public int getUid() {
+		return uid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 
-	public String getUsername() {
-		return username;
+	public long getUphone() {
+		return uphone;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUphone(long uphone) {
+		this.uphone = uphone;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUname() {
+		return uname;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public String getUpwd() {
+		return upwd;
+	}
+
+	public void setUpwd(String upwd) {
+		this.upwd = upwd;
+	}
+
+	public int getUrank() {
+		return urank;
+	}
+
+	public void setUrank(int urank) {
+		this.urank = urank;
+	}
+
+	public String getUadress() {
+		return uadress;
+	}
+
+	public void setUadress(String uadress) {
+		this.uadress = uadress;
+	}
+
+	public int getStunum() {
+		return stunum;
+	}
+
+	public void setStunum(int stunum) {
+		this.stunum = stunum;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password="
-				+ password + "]";
+		return "User [uid=" + uid + ", uphone=" + uphone + ", uname=" + uname
+				+ ", upwd=" + upwd + ", urank=" + urank + ", uadress="
+				+ uadress + ", stunum=" + stunum + "]";
 	}
 
 }

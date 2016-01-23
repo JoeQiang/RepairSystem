@@ -25,12 +25,12 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.6</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-		</dependency>
 
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
 
 		<!-- JSTL标签库 -->
 		<dependency>

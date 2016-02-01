@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,49 +68,17 @@
 			</div>
 	</nav>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="login-panel panel panel-default">
-					<div class="panel-heading">
-						<h2 style="text-align:center;" class="panel-title">请登录</h2>
-					</div>
+		<div class="row" style="margin: 40px">
+			<div class="col-lg-6 col-md-offset-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">操作信息</div>
 					<div class="panel-body">
-						<sf:form action="${pageContext.request.contextPath }/login.do"
-							modelAttribute="command" method="POST">
-							<fieldset>
-								<div class="form-group">
-									<sf:input id="stunum" path="stunum" cssClass="form-control"
-										maxlength="9" placeholder="学号" required="" />
-									<sf:errors path="stunum" cssClass="error" />
-									<!-- <input class="form-control" placeholder="注册手机号" name="email"
-										type="text" autofocus> -->
-								</div>
-								<div class="form-group">
-									<!-- <input class="form-control" placeholder="输入密码" name="password"
-										type="password" value=""> -->
-									<sf:password showPassword="true" path="upwd"
-										cssClass="form-control" size="6" maxlength="16"
-										placeholder="密码" required="" />
-									<sf:errors path="upwd" cssClass="error" />
-									<p class="help-block" style="float:right;">
-										<a href="www.baidu.com">忘记密码?</a>
-									</p>
-								</div>
-								<div class="checkbox">
-									<label> <input name="remember" type="checkbox"
-										value="Remember Me">记住密码
-									</label>
-								</div>
-								<!-- Change this to a button or input when using this as a form -->
-								<button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
-								<!-- <a href="index.html" class="btn btn-lg btn-primary btn-block">登录</a> -->
-								<label style="color: red;">${errorMsg }</label>
-							</fieldset>
-
-						</sf:form>
+						<p>${msg }</p>
+					</div>
+					<div class="panel-footer">
+						<button class="btn btn-default" onclick="history.go(-1)">返回</button>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -126,12 +94,6 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="${pageContext.request.contextPath }/js/sb-admin-2.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#stunum').val('');
-		});
-	</script>
-
 </body>
 
 </html>

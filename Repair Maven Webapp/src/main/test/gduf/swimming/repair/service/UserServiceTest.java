@@ -1,5 +1,6 @@
 package gduf.swimming.repair.service;
 
+import gduf.swimming.repair.dao.UserDao;
 import gduf.swimming.repair.model.User;
 
 import org.junit.Test;
@@ -12,25 +13,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "/applicationContext.xml")
 public class UserServiceTest {
 
+	/*
+	 * @Autowired private UserService userService;
+	 */
 	@Autowired
-	private UserService userService;
+	private UserDao userDao;
 
 	@Test
 	public void testLoginCheck() {
-		User user = new User();
-		user.setUsername("manager2");
-		user.setPassword("123");
-		if (null != userService.loginCheck(user))
-			System.out.println("------OK!!-----");
-		else
-			System.out.println("------Sorry!!-----");
+		userDao.findUserByName(131545236);
 	}
 
 	@Test
 	public void testRegister() {
-		User user = new User();
-		user.setUsername("manager");
-		user.setPassword("123");
-		System.out.println(userService.register(user));
 	}
 }

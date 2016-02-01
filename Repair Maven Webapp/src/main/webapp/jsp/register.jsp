@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,9 +60,10 @@
 			<!-- /.navbar-header -->
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-top-links navbar-right">
-					<li><a href="#">登陆</a></li>
-					<li><a href="#">注册</a></li>
-					<li><a href="#">关于</a></li>
+					<li><a href="${pageContext.request.contextPath }/login.do">登陆</a></li>
+					<li><a href="${pageContext.request.contextPath }/register.do">注册</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/jsp/about.jsp">关于</a></li>
 				</ul>
 			</div>
 	</nav>
@@ -75,30 +77,56 @@
 				<h4>
 					<label>创建新账号</label>
 				</h4>
-				<form>
+				<sf:form action="${pageContext.request.contextPath }/register.do"
+					method="POST" onsubmit="return check()" modelAttribute="command">
 					<div class="form-group">
-						<label>学号</label> <input type="text" class="form-control"
-							placeholder="手机号">
+						<label>学号</label>
+						<!-- <input type="text" id="stunum"
+							class="form-control" name="stunum" placeholder="学号" required=""> -->
+						<sf:input cssClass="form-control" path="stunum" id="stunum"
+							placeholder="学号" required="" />
 						<p class="help-block">这是你的以后登陆系统的账号</p>
 					</div>
 					<div class="form-group">
-						<label>登陆密码</label> <input type="password" class="form-control"
-							placeholder="密码">
+						<label>登陆密码</label>
+						<!-- <input id="upwd" name="upwd" type="password"
+							class="form-control" placeholder="密码" required=""> -->
+						<sf:password path="upwd" id="upwd" placeholder="密码" required=""
+							cssClass="form-control" />
 						<p class="help-block">密码长度为6-16位</p>
 					</div>
 					<div class="form-group">
-						<label>确认密码</label> <input type="password" class="form-control"
-							placeholder="密码">
+						<label>确认密码</label> <input id="rpwd" type="password"
+							class="form-control" placeholder="密码" required="">
 						<p class="help-block">密码长度为6-16位</p>
 					</div>
 					<div class="form-group">
-						<label>手机号</label> <input type="text" class="form-control"
-							placeholder="学号">
+						<label>姓名</label>
+						<sf:input cssClass="form-control" path="uname" id="uname"
+							placeholder="姓名" required="" />
+						<p class="help-block">请输入姓名</p>
+						<label style="color:red;" id="msg">${errorMsg }</label> <label
+							style="color: red"><sf:errors /></label>
+					</div>
+					<div class="form-group">
+						<label>手机号</label>
+						<sf:input cssClass="form-control" path="uphone" id="uphone"
+							placeholder="手机号" required="" />
 						<p class="help-block">预留手机号</p>
+						<label style="color: red"><sf:errors /></label>
 					</div>
-					<button class="btn btn-primary">注册</button>
+					<div class="form-group">
+						<label>宿舍地址</label>
+						<sf:input cssClass="form-control" path="uadress" id="uadress"
+							placeholder="宿舍地址" required="" />
+						<p class="help-block">宿舍地址格式如 18#b213</p>
+						<label style="color:red;" id="msg">${errorMsg }</label> <label
+							style="color: red"><sf:errors /></label>
+					</div>
+					<button class="btn btn-primary" type="submit">注册</button>
 					<button class="btn btn-default" onclick="history.go(-1)">返回</button>
-				</form>
+
+				</sf:form>
 			</div>
 			<!-- 	<div class="col-lg-3 col-md-offset-1">
 				<div class="panel panel-default">
@@ -141,6 +169,49 @@
 
 		<!-- Custom Theme JavaScript -->
 		<script src="${pageContext.request.contextPath }/js/sb-admin-2.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#stunum').val('');
+				$('#uphone').val('');
+			});
+			function check() {
+
+				var upwd = $('#upwd').val();
+				var rpwd = $('#rpwd').val();
+				var stunum = $('#stunum').val();
+				var uphone = $('#uphone').val();
+				var uname = $('#uname').val();
+				var uadress = $('#uadress').val();
+				if (!/^1[2|3|4|5]\d{7}$/.test(stunum)) {
+					$('#msg').html('输入学号必须合法');
+					return false;
+				}
+
+				if (!/^\d{1,2}#[a|b]?\d{3}$/.test(uadress)) {
+					$('#msg').html('输入地址不合法，地址格式:栋数+#+房间号,如:18#b213');
+					return false;
+				}
+				if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(uphone)) {
+					$('#msg').html('输入手机号必须合法');
+					return false;
+				}
+				if (!/^\D{2,5}$/.test(uname)) {
+					$('#msg').html('输入姓名不合法');
+					return false;
+				}
+				if (upwd.length<6||upwd.length>16) {
+					$('#msg').html('密码长度为6~16位');
+					return false;
+				}
+				if (upwd != rpwd) {
+					$('#msg').html('两次输入密码不一致');
+					return false;
+				}
+
+				return true;
+
+			}
+		</script>
 </body>
 
 </html>

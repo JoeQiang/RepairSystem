@@ -7,12 +7,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Repair Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springversion>4.2.4.RELEASE</springversion>
-		<junitversion>4.12</junitversion>
+		<junitversion>4.8.1</junitversion>
 	</properties>
 	<dependencies>
+
 		<!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -85,6 +87,24 @@
 			<artifactId>jxl</artifactId>
 			<version>2.6.12</version>
 		</dependency>
+		<!-- Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
 
 		<!-- Spring4.2.4.RELEASE -->
 		<dependency>
@@ -140,6 +160,16 @@
 
 	</dependencies>
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
 		<finalName>Repair</finalName>
 	</build>
 </project>

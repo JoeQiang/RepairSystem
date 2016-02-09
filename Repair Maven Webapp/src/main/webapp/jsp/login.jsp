@@ -76,7 +76,7 @@
 					</div>
 					<div class="panel-body">
 						<sf:form action="${pageContext.request.contextPath }/login.do"
-							modelAttribute="command" method="POST">
+							modelAttribute="command" method="POST" onsubmit="return check()">
 							<fieldset>
 								<div class="form-group">
 									<sf:input id="stunum" path="stunum" cssClass="form-control"
@@ -104,7 +104,7 @@
 								<!-- Change this to a button or input when using this as a form -->
 								<button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
 								<!-- <a href="index.html" class="btn btn-lg btn-primary btn-block">登录</a> -->
-								<label style="color: red;">${errorMsg }</label>
+								<label id="msg" style="color: red;">${errorMsg }</label>
 							</fieldset>
 
 						</sf:form>
@@ -130,6 +130,14 @@
 		$(document).ready(function() {
 			$('#stunum').val('');
 		});
+		function check() {
+			var stunum = $('#stunum').val();
+			if (!/^1[2|3|4|5]\d{7}$/.test(stunum)) {
+				$('#msg').html('输入学号必须合法');
+				return false;
+			}
+			return true;
+		}
 	</script>
 
 </body>

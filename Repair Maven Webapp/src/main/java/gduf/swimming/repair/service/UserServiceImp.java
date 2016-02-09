@@ -44,7 +44,7 @@ public class UserServiceImp implements UserService {
 	}
 
 	public int changePwd(User user) {
-		// TODO Auto-generated method stub
+		user.setUpwd(MD5Utils.MD5(user.getUpwd()));
 		return userDao.chagePwd(user);
 	}
 

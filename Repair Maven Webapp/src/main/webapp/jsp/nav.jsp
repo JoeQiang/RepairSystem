@@ -9,7 +9,8 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="index.html">宿舍报修系统</a>
+		<a class="navbar-brand"
+			href="${pageContext.request.contextPath }/main/admin.do">宿舍报修系统</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -33,14 +34,12 @@
 			<ul class="nav" id="side-menu">
 				<li class="sidebar-search">
 					<div class="input-group custom-search-form">
-						<c:if test="${user.urank eq 0 }">
-							<input type="text" class="form-control" placeholder="Search...">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-						</c:if>
+						<!-- <input type="text" class="form-control" placeholder="Search...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						</span> -->
 					</div> <!-- /input-group -->
 				</li>
 				<c:if test="${user.urank eq 0 }">
@@ -56,9 +55,12 @@
 							</a></li>
 							<li><a href="#">报单状态 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
-									<li><a href="#">全部</a></li>
-									<li><a href="#">未审核</a></li>
-									<li><a href="#">已审核</a></li>
+									<li><a
+										href="${pageContext.request.contextPath }/form/manager/all.do?pageNum=1">全部</a></li>
+									<li><a
+										href="${pageContext.request.contextPath }/form/manager/undeal.do?pageNum=1">未审核</a></li>
+									<li><a
+										href="${pageContext.request.contextPath }/form/manager/deal.do?pageNum=1">已审核</a></li>
 								</ul> <!-- /.nav-third-level --></li>
 						</ul> <!-- /.nav-second-level --></li>
 

@@ -66,8 +66,8 @@
 								</div>
 								<div class="form-group">
 									<label>新密码</label>
-									<sf:password id="upwd" cssClass="form-control" path="upwd"
-										required="" placeholder="输入新密码" />
+									<sf:password cssClass="form-control" path="upwd" required=""
+										placeholder="输入新密码" id="pwd" />
 								</div>
 								<div class="form-group">
 									<label>确认密码</label> <input id="rpwd" class="form-control"
@@ -101,12 +101,15 @@
 	<script src="${pageContext.request.contextPath }/js/sb-admin-2.js"></script>
 	<script>
 		function check() {
-			var uwpd = $('#upwd').val();
+			var uwpd = $('#pwd').val();
 			var rpwd = $('#rpwd').val();
 			if (uwpd.length <6||upwd.length>16) {
 				$('#msg').html('密码长度为6~16位');
 				return false;
 			}
+			alert(upwd);
+			console.log(upwd);
+			alert(rpwd);
 			if(upwd!=rpwd){
 				$('#msg').html('两次输入密码不一致');
 				return false;

@@ -5,19 +5,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.RowMapper;
 
-public class Form implements Serializable {
+@SuppressWarnings("serial")
+public class Form implements RowMapper<Form>, Serializable {
 	private int fid;
 	private String fcontent;
 	private int uid;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fdate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fdealine;
 	private int fstatus;
 	private int ftype;
 	private long fuphone;
 	private String funame;
 	private String fuadress;
+	private String frsp;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fapointment;
 
 	public int getFid() {
 		return fid;
@@ -99,6 +107,22 @@ public class Form implements Serializable {
 		this.uid = uid;
 	}
 
+	public Date getFapointment() {
+		return fapointment;
+	}
+
+	public void setFapointment(Date fapointment) {
+		this.fapointment = fapointment;
+	}
+
+	public String getFrsp() {
+		return frsp;
+	}
+
+	public void setFrsp(String frsp) {
+		this.frsp = frsp;
+	}
+
 	@Override
 	public String toString() {
 		return "Form [fid=" + fid + ", fcontent=" + fcontent + ", uid=" + uid
@@ -107,4 +131,21 @@ public class Form implements Serializable {
 				+ ", funame=" + funame + ", fuadress=" + fuadress + "]";
 	}
 
+	@Override
+	public Form mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Form form = new Form();
+		form.setFapointment(rs.getDate("fapointment"));
+		form.setFcontent(rs.getString("fcontent"));
+		form.setFdate(rs.getDate("fdate"));
+		form.setFdealine(rs.getDate("fdealine"));
+		form.setFid(rs.getInt("fid"));
+		form.setFstatus(rs.getInt("fstatus"));
+		form.setFtype(rs.getInt("ftype"));
+		form.setFuadress(rs.getString("fuadress"));
+		form.setFuname(rs.getString("funame"));
+		form.setFuphone(rs.getLong("fuphone"));
+		form.setUid(rs.getInt("uid"));
+		form.setFrsp(rs.getString("frsp"));
+		return form;
+	}
 }

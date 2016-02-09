@@ -128,34 +128,6 @@
 
 				</sf:form>
 			</div>
-			<!-- 	<div class="col-lg-3 col-md-offset-1">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">注册向导</h3>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<label>步骤一</label>
-								<p class="text-info">填写注册信息</p>
-							</div>
-						</div>
-						<div class="row" style="border-top:1px solid #F8F8D1;">
-							<div class="col-lg-12">
-								<label>步骤二</label>
-								<p class="text-info">填写注册信息</p>
-							</div>
-						</div>
-						<div class="row" style="border-top:1px solid #F8F8D1;">
-							<div class="col-lg-12">
-								<label>步骤一</label>
-								<p class="text-info">填写注册信息</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
- -->
 		</div>
 
 		<!-- jQuery -->

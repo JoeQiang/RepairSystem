@@ -30,12 +30,6 @@
 	href="${pageContext.request.contextPath }/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -56,9 +50,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">报修单</div>
 							<!-- /.panel-heading -->
-							<div class="panel-body">
-								<sf:form action="" method="POST" modelAttribute="form">
-									<sf:hidden path="uid" value="${user.uid }" />
+							<sf:form
+								action="${pageContext.request.contextPath }/form/addNew.do"
+								method="POST" modelAttribute="form">
+								<div class="panel-body">
 									<table style="width:100%;" class="table table-bordered">
 										<tbody class="table-hover">
 											<tr>
@@ -71,44 +66,39 @@
 														<!--  <input type="text" class="form-control"
 															id="exampleInputEmail1" placeholder="请输入姓名"> -->
 														<sf:input cssClass="form-control" path="funame"
-															placeholder="请输入姓名" required="" value="${user.uname }" />
+															placeholder="请输入姓名" value="${user.uname }" />
 													</div>
 												</td>
 												<td>
 													<div class="form-group">
 														<label>联系电话</label>
-														<!-- <input type="text"
-															class="form-control" id="exampleInputEmail1"
-															placeholder="请输入电话"> -->
 														<sf:input cssClass="form-control" path="fuphone"
-															placeholder="请输入电话" required="" value="${user.uphone }" />
+															placeholder="请输入电话" id="phone" value="${user.uphone }" />
 													</div>
 												</td>
 											</tr>
 											<tr>
-												<sf:hidden path="fuadress" value="${user.uadress }" />
 												<td colspan="2"><label>地址&amp;故障类型</label>
 													<ul class="list-group">
 														<li class="list-group-item" style="float:left; width:25%;">
-															<select class="form-control" required="">
+															<select id="area" class="form-control"
+															onchange="areaSelect()">
 																<option value="#" selected>区域</option>
-																<option>北苑</option>
-																<option>南苑</option>
+																<option value="north">北苑</option>
+																<option value="south">南苑</option>
 														</select>
 														</li>
 														<li class="list-group-item" style="float:left; width:25%;">
-															<select class="form-control" required="">
+															<select class="form-control" id="ban">
 																<option value="#" selected>楼栋</option>
-																<option>21</option>
 														</select>
 														</li>
 														<li class="list-group-item" style="float:left; width:25%;">
-															<input type="text" class="form-control" placeholder="房间号"
-															required="">
+															<input id="room" type="text" class="form-control"
+															placeholder="房间号">
 														</li>
 														<li class="list-group-item" style="float:left; width:25%;">
-															<sf:select cssClass="form-control" path="ftype"
-																required="">
+															<sf:select cssClass="form-control" path="ftype">
 																<option value="#" selected>故障类型</option>
 																<option value="1">网络故障</option>
 																<option value="2">电器故障</option>
@@ -121,30 +111,32 @@
 												<td colspan="2">
 													<div class="form-group">
 														<label>预约时间</label>
-														<%-- <sf:input type="date" path="fapointment"
-															class="form-control" required="" /> --%>
-														<input type="date" class="form-control">
+														<sf:hidden path="uid" value="${user.uid }" />
+														<sf:hidden path="fuadress" id="adress" value="" />
+														<sf:hidden path="fapointment" id="date" value="" />
+														<input id="adate" type="date" class="form-control">
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td colspan="2"><label>故障描述</label> <sf:textarea
-														cssClass="form-control"
+														cssClass="form-control" id="content"
 														cssStyle="width:100%;margin-top:5px; resize:none"
-														cols="10" rows="10" placeholder="故障描述" required=""
-														path="fcontent"></sf:textarea></td>
+														cols="10" rows="10" placeholder="故障描述" path="fcontent"></sf:textarea></td>
 											</tr>
 										</tbody>
 									</table>
-								</sf:form>
-							</div>
-							<!-- /.panel-body -->
-							<div class="panel-footer">
-								<div style="margin-left:42%;">
-									<button type="submit" class="btn btn-primary">提交</button>
-									<button type="button" class="btn btn-default">返回</button>
 								</div>
-							</div>
+								<!-- /.panel-body -->
+								<div class="panel-footer">
+									<div style="margin-left:42%;">
+										<button type="submit" class="btn btn-primary"
+											onclick="addParam()">提交</button>
+										<button type="button" onclick="history.go(-1)"
+											class="btn btn-default">返回</button>
+									</div>
+								</div>
+							</sf:form>
 						</div>
 					</div>
 					<!-- /.panel -->
@@ -168,6 +160,39 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="${pageContext.request.contextPath }/js/sb-admin-2.js"></script>
+	<script>
+		function addParam() {
+			$('#adress').val('');
+			var ban = $('#ban').val();
+			var room = $('#room').val();
+			var address = ban + '#' + room;
+			$('#adress').val(address);
+			var adate = $('#adate').val();
+			$('#date').val(adate);
+		}
+		function areaSelect() {
+			var area = $("#area").val();
+			$.ajax({
+				url : '${pageContext.request.contextPath}/form/allArea.do',
+				type : 'GET',
+				data : {
+					'area' : area
+				},
+				success : function(result) {
+					var data = eval(result);
+					$("#ban").empty();
+					console.log(data);
+					for (var n = 0; n < data.length; n++) {
+						var ids = data[n].aid;
+						var names = data[n].ban;
+						$("#ban").append(
+								"<option id='"+ids+"' value='"+names+"'>"
+										+ names + "</option>");
+					}
+				}
+			})
+		}
+	</script>
 </body>
 
 </html>

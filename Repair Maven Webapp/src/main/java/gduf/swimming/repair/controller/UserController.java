@@ -52,6 +52,12 @@ public class UserController {
 		return mav;
 	}
 
+	/**
+	 * 注册
+	 * 
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView register(@Valid @ModelAttribute("command") User user) {
 		ModelAndView mav = new ModelAndView();
@@ -118,7 +124,7 @@ public class UserController {
 		int refect = userService.changePwd(user);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", "更改密码成功");
-		mav.setViewName("redirect:/user/bcpwd.do");
+		mav.setViewName("bpwd");
 		return mav;
 	}
 }

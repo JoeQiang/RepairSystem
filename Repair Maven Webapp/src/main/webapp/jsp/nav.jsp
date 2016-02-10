@@ -9,8 +9,14 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand"
-			href="${pageContext.request.contextPath }/main/admin.do">宿舍报修系统</a>
+		<c:if test="${user.urank eq 0 }">
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath }/main/admin.do">宿舍报修系统</a>
+		</c:if>
+		<c:if test="${user.urank ne 0 }">
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath }/main/custom.do">宿舍报修系统</a>
+		</c:if>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -63,14 +69,14 @@
 										href="${pageContext.request.contextPath }/form/manager/deal.do?pageNum=1">已审核</a></li>
 								</ul> <!-- /.nav-third-level --></li>
 						</ul> <!-- /.nav-second-level --></li>
-
-					<li><a href="#"><i class="fa fa-edit fa-fw"></i>短信管理<span
+					<li><a
+						href="${pageContext.request.contextPath }/order/manager.do?pageNum=1"><i
+							class="fa fa-edit fa-fw"></i>用户催单 </a> <!-- <li><a href="#"><i class="fa fa-edit fa-fw"></i>短信管理<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li><a href="#">发送短信</a></li>
 							<li><a href="#">已发短信</a></li>
-						</ul></li>
-				</c:if>
+						</ul></li> --></c:if>
 				<!-- 我要保修 -->
 				<c:if test="${user.urank eq 1 }">
 					<li><a href="#"><i class="fa fa-table fa-fw"></i>我要报修<span
@@ -78,7 +84,8 @@
 						<ul class="nav nav-second-level">
 							<li><a
 								href="${pageContext.request.contextPath }/form/addNew.do">添加报修单</a></li>
-							<li><a href="#">进度查询</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/form/process.do?uid=${user.uid}">进度查看</a></li>
 						</ul></li>
 				</c:if>
 				<!-- 个人中心 -->

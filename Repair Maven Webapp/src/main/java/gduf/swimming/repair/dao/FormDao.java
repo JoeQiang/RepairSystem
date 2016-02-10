@@ -31,4 +31,6 @@ public interface FormDao {
 
 	public int deleteFormById(int fid);
 
+	public List<Form> findFormByUid(int uid);
+
 }

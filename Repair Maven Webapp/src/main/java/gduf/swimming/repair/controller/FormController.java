@@ -2,8 +2,10 @@ package gduf.swimming.repair.controller;
 
 import gduf.swimming.repair.model.Area;
 import gduf.swimming.repair.model.Form;
+import gduf.swimming.repair.model.Order;
 import gduf.swimming.repair.model.Page;
 import gduf.swimming.repair.service.FormService;
+import gduf.swimming.repair.service.OrderService;
 import gduf.swimming.repair.util.Constants;
 import gduf.swimming.repair.util.MessageUtils;
 
@@ -43,6 +45,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class FormController {
 	@Autowired
 	private FormService formService;
+	@Autowired
+	private OrderService orderService;
 
 	/**
 	 * 跳转新增保修单页面
@@ -173,8 +177,12 @@ public class FormController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		MessageUtils messageUtils = MessageUtils.getInstance();
 		messageUtils.setRecNum(String.valueOf(form.getFuphone()));
+		StringBuilder product = new StringBuilder("你好，你的报单编号为" + form.getFid())
+				.append("的报修单已经接受处理")
+				.append(",维修人员将于" + form.getFapointment() + "到你宿舍")
+				.append(form.getFuadress() + "进行处理，请耐心等候");
 		String smsTemplate = "{\"code\":\"" + form.getFid()
-				+ "\",\"product\":\"" + form.getFuadress() + "\"}";
+				+ "\",\"product\":\"" + product.toString() + "\"}";
 		messageUtils.setSmsParams(smsTemplate.toString());
 		messageUtils.sendMsg();
 		map.put("success", true);
@@ -302,5 +310,15 @@ public class FormController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@RequestMapping(value = "/process", method = RequestMethod.GET)
+	public ModelAndView processView(@RequestParam int uid, ModelAndView mav) {
+		List<Form> formList = formService.findFormByUid(uid);
+		List<Order> orderList = orderService.findOrderByUid(uid);
+		mav.addObject("list", formList);
+		mav.addObject("orderList", orderList);
+		mav.setViewName("process");
+		return mav;
 	}
 }

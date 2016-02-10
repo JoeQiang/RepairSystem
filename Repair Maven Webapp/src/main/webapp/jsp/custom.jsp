@@ -129,30 +129,11 @@
 						</a>
 					</div>
 				</div>
-
-				<!-- 报单状态 -->
-				<!-- 高级查询 -->
-				<div class="col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">查询</div>
-						<form role="form">
-							<div class="panel-body">
-								<div class="form-group input-group">
-									<input type="text" class="form-control"> <span
-										class="input-group-btn">
-										<button class="btn btn-default" type="button">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-							</div>
-					</div>
-
-				</div>
 			</div>
 		</div>
-		<!-- /.row -->
-		<!-- 头部信息 -->
+	</div>
+	<!-- /.row -->
+	<!-- 头部信息 -->
 	</div>
 	<!-- /.container-fluid -->
 	</div>

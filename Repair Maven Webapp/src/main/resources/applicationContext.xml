@@ -118,6 +118,7 @@
 			<mvc:mapping path="/main/**" />
 			<mvc:mapping path="/form/**" />
 			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/order/**" />
 			<bean class="gduf.swimming.repair.interceptor.PermissionInterceptor" />
 		</mvc:interceptor>
 

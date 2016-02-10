@@ -119,4 +119,10 @@ public class FormDaoImp implements FormDao {
 		return jdbcTemplate.update(sql, new Object[] { fid });
 	}
 
+	@Override
+	public List<Form> findFormByUid(int uid) {
+		String sql = "select * from t_form where uid = ?";
+		return jdbcTemplate.query(sql, new Object[] { uid }, new Form());
+	}
+
 }

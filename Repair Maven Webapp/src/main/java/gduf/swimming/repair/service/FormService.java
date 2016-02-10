@@ -19,4 +19,6 @@ public interface FormService {
 	public int updateformStatus(int fid, int fstatus);
 
 	public int deleteFormById(int fid);
+
+	public List<Form> findFormByUid(int uid);
 }

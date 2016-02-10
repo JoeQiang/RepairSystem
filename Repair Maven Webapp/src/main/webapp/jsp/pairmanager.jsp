@@ -95,7 +95,7 @@
 																	aria-label="Rendering engine: activate to sort column descending"
 																	style="width: 21px;">
 																	<div class="checkbox">
-																		<label> <input type="checkbox" value="">
+																		<label> <!--  <input type="checkbox" value=""> -->
 																		</label>
 																	</div>
 																</th>
@@ -371,7 +371,7 @@
 				var path = url + val + '.do?pageNum=1';
 				$('#searbar').attr('action', path);
 				return true;
-			}`
+			}
 		}
 	</script>
 </body>

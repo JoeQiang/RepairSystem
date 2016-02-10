@@ -23,7 +23,6 @@ public class Form implements RowMapper<Form>, Serializable {
 	private String funame;
 	private String fuadress;
 	private String frsp;
-
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fapointment;
 
@@ -134,18 +133,31 @@ public class Form implements RowMapper<Form>, Serializable {
 	@Override
 	public Form mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Form form = new Form();
+
 		form.setFapointment(rs.getDate("fapointment"));
+
 		form.setFcontent(rs.getString("fcontent"));
+
 		form.setFdate(rs.getDate("fdate"));
+
 		form.setFdealine(rs.getDate("fdealine"));
+
 		form.setFid(rs.getInt("fid"));
+
 		form.setFstatus(rs.getInt("fstatus"));
+
 		form.setFtype(rs.getInt("ftype"));
+
 		form.setFuadress(rs.getString("fuadress"));
+
 		form.setFuname(rs.getString("funame"));
+
 		form.setFuphone(rs.getLong("fuphone"));
+
 		form.setUid(rs.getInt("uid"));
+
 		form.setFrsp(rs.getString("frsp"));
+
 		return form;
 	}
 }

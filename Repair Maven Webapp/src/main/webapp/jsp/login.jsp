@@ -92,15 +92,15 @@
 										cssClass="form-control" size="6" maxlength="16"
 										placeholder="密码" required="" />
 									<sf:errors path="upwd" cssClass="error" />
-									<p class="help-block" style="float:right;">
+									<!-- <p class="help-block" style="float:right;">
 										<a href="www.baidu.com">忘记密码?</a>
-									</p>
+									</p> -->
 								</div>
-								<div class="checkbox">
+								<!-- <div class="checkbox">
 									<label> <input name="remember" type="checkbox"
 										value="Remember Me">记住密码
 									</label>
-								</div>
+								</div> -->
 								<!-- Change this to a button or input when using this as a form -->
 								<button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
 								<!-- <a href="index.html" class="btn btn-lg btn-primary btn-block">登录</a> -->

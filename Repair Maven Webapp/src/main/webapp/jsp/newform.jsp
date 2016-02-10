@@ -67,6 +67,7 @@
 															id="exampleInputEmail1" placeholder="请输入姓名"> -->
 														<sf:input cssClass="form-control" path="funame"
 															placeholder="请输入姓名" value="${user.uname }" />
+														<sf:hidden path="uid" value="${user.uid }" />
 													</div>
 												</td>
 												<td>

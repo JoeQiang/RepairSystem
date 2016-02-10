@@ -6,12 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import jxl.biff.Type;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -25,7 +22,7 @@ public class UserDaoImp implements UserDao {
 		Object[] params = new Object[] { studentNum };
 		jdbcTemplate.query(sqlStr, params, new int[] { Types.INTEGER },
 				new RowCallbackHandler() {
-			public void processRow(ResultSet rs) throws SQLException {
+					public void processRow(ResultSet rs) throws SQLException {
 						u.setStunum(rs.getInt("stunum"));
 						u.setUadress(rs.getString("uadress"));
 						u.setUid(rs.getInt("uid"));

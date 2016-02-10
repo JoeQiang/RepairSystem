@@ -50,4 +50,9 @@ public class FormServiceImp implements FormService {
 	public int deleteFormById(int fid) {
 		return formDao.deleteFormById(fid);
 	}
+
+	@Override
+	public List<Form> findFormByUid(int uid) {
+		return formDao.findFormByUid(uid);
+	}
 }

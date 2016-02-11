@@ -8,6 +8,7 @@ import gduf.swimming.repair.util.Constants;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,10 @@ public class FormServiceImp implements FormService {
 	@Override
 	public List<Form> findFormByUid(int uid) {
 		return formDao.findFormByUid(uid);
+	}
+
+	@Override
+	public Map<String, Object> countForm() {
+		return formDao.countForm();
 	}
 }

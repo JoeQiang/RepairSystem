@@ -5,6 +5,7 @@ import gduf.swimming.repair.model.Form;
 import gduf.swimming.repair.model.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FormService {
 
@@ -21,4 +22,6 @@ public interface FormService {
 	public int deleteFormById(int fid);
 
 	public List<Form> findFormByUid(int uid);
+
+	public Map<String, Object> countForm();
 }

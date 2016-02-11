@@ -3,9 +3,12 @@ package gduf.swimming.repair.dao;
 import gduf.swimming.repair.model.Area;
 import gduf.swimming.repair.model.Form;
 import gduf.swimming.repair.model.Page;
+import gduf.swimming.repair.util.Constants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -125,4 +128,18 @@ public class FormDaoImp implements FormDao {
 		return jdbcTemplate.query(sql, new Object[] { uid }, new Form());
 	}
 
+	@Override
+	public Map<String, Object> countForm() {
+		String handleSql = "select count(fid) as totalRecord from t_form where 1=1 and fstatus = "
+				+ Constants.FORM_TYPE_HANDLE;
+		String unhandleSql = "select count(fid) as totalRecord from t_form where 1=1 and fstatus = "
+				+ Constants.FORM_TYPE_UNHANDLE;
+		int handleCount = jdbcTemplate.queryForObject(handleSql, Integer.class);
+		int unhandleCount = jdbcTemplate.queryForObject(unhandleSql,
+				Integer.class);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("handle", handleCount);
+		map.put("unhandle", unhandleCount);
+		return map;
+	}
 }
